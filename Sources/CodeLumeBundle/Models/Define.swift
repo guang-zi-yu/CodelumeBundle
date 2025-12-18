@@ -1,0 +1,7 @@
+let BUNDLE_WALLPAPER = "Wallpaper"
+let BUNDLE_EXTENSION = ".bundle"
+let BUNDLE_INFO_PLIST = "Info.plist"
+let BUNDLE_VIDEO_DIR = "Video/"
+let BUNDLE_VIDEO_PLIST = "Video.plist"
+let BUNDLE_PREVIEW_DIR = "Preview/"
+let BUNDLE_PREVIEW_JPEG = "Preview.jpg"
