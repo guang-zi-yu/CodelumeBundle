@@ -1,8 +1,8 @@
 import Testing
 import Foundation
-@testable import CodeLumeBundle
+@testable import CodelumeBundle
 
-struct CodeLumeBundleTests {
+struct CodelumeBundleTests {
     
     @Test func testWallpaper() async throws {
         let desktopURL = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask).first!
@@ -30,7 +30,7 @@ struct CodeLumeBundleTests {
         var result = wallpaper.create(bundleName: name, saveDir: testDirectory)
         #expect(result == true)
         
-        let videoURL = URL(fileURLWithPath: "/Users/guangziyu/data/CodeLumeBundle/Resource/wallpaper.mp4")
+        let videoURL = URL(fileURLWithPath: "/Users/guangziyu/data/CodelumeBundle/Resource/wallpaper.mp4")
         _ = wallpaper.addVideo(videoUrl: videoURL)
         
         result = wallpaper.save()

@@ -4,23 +4,23 @@
 import PackageDescription
 
 let package = Package(
-    name: "CodeLumeBundle",
+    name: "CodelumeBundle",
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "CodeLumeBundle",
-            targets: ["CodeLumeBundle"]
+            name: "CodelumeBundle",
+            targets: ["CodelumeBundle"]
         ),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "CodeLumeBundle"
+            name: "CodelumeBundle"
         ),
         .testTarget(
-            name: "CodeLumeBundleTests",
-            dependencies: ["CodeLumeBundle"]
+            name: "CodelumeBundleTests",
+            dependencies: ["CodelumeBundle"]
         ),
     ]
 )
