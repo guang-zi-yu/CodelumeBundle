@@ -27,6 +27,28 @@ public class VideoWallpaper: Wallpaper {
         
         return true
     }
+
+    override func open(wallpaperUrl: URL) -> Bool {
+        if !super.open(wallpaperUrl: wallpaperUrl) {
+            return false
+        }
+        
+        let videoPlistURL = wallpaperUrl.appendingPathComponent(BUNDLE_VIDEO_DIR + BUNDLE_VIDEO_PLIST)
+        do {
+            guard let info = VideoInfo.read(from: videoPlistURL) else {
+                print("Read video bundle info plist failed: \(videoPlistURL.path)")
+                return false
+            }
+            
+            self.videoInfo = info
+            self.videoUrl = wallpaperUrl.appendingPathComponent(BUNDLE_VIDEO_DIR + BUNDLE_WALLPAPER).appendingPathExtension(self.videoInfo!.format)
+        } catch {
+            print("Read video bundle info plist failed: \(error)")
+            return false
+        }
+        
+        return true
+    }
     
     override func save() -> Bool {
         if !super.save() {
@@ -45,7 +67,9 @@ public class VideoWallpaper: Wallpaper {
         let videoUrl = bundleUrl!.appendingPathComponent(BUNDLE_VIDEO_DIR + BUNDLE_WALLPAPER).appendingPathExtension(self.videoUrl!.pathExtension)
         let videoPlistUrl = bundleUrl!.appendingPathComponent(BUNDLE_VIDEO_DIR + BUNDLE_VIDEO_PLIST)
         do {
-            try FileManager.default.copyItem(at: self.videoUrl!, to: videoUrl)
+            if self.videoUrl != videoUrl {
+                try FileManager.default.copyItem(at: self.videoUrl!, to: videoUrl)
+            }
             try videoInfo.write(to: videoPlistUrl)
         } catch {
             print("Save video failed: \(error)")

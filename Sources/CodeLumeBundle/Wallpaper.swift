@@ -29,6 +29,24 @@ public class Wallpaper {
         
         return true
     }
+
+    func open(wallpaperUrl: URL) -> Bool {
+        let infoPlistURL = wallpaperUrl.appendingPathComponent(BUNDLE_INFO_PLIST)
+        do {
+            guard let info = WallpaperInfo.read(from: infoPlistURL) else {
+                print("Read wallpaper bundle info plist failed: \(infoPlistURL.path)")
+                return false
+            }
+            
+            self.wallpaperInfo = info
+            self.bundleUrl = wallpaperUrl
+            self.bundleName = wallpaperUrl.lastPathComponent.deletingPathExtension
+        } catch {
+            print("Read wallpaper bundle info plist failed: \(error)")
+            return false
+        }
+        return true
+    }
     
     func save() -> Bool {
         guard let url = bundleUrl else {
